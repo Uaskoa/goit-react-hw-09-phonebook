@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import "./ContactList.scss";
+import './ContactList.scss';
 const ContactListItem = ({ id, name, number, onDeleteContact }) => (
   <li className="contact-list-item">
     <span className="contact-list-name">{name} </span>

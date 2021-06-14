@@ -1,8 +1,8 @@
 const greetingsStyles = {
-  textAlign: "center",
-  padding: "20px",
-  marginTop: "40vh",
-  backgroundCOlor: "#ffffff",
+  textAlign: 'center',
+  padding: '20px',
+  marginTop: '40vh',
+  backgroundCOlor: '#ffffff',
 };
 
 const HomeView = () => {

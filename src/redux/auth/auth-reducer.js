@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
-import { createReducer } from "@reduxjs/toolkit";
+import { combineReducers } from 'redux';
+import { createReducer } from '@reduxjs/toolkit';
 import {
   registerSuccess,
   registerError,
@@ -9,7 +9,7 @@ import {
   logoutError,
   getCurrentUserSuccess,
   getCurrentUserError,
-} from "./auth-actions";
+} from './auth-actions';
 
 const initialUserState = { name: null, email: null };
 

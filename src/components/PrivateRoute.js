@@ -1,6 +1,6 @@
-import { Route, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { getIsAuth } from "../redux/auth/auth-selectors";
+import { Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getIsAuth } from '../redux/auth/auth-selectors';
 
 /**
  * - Если маршрут приватный и пользователь залогинен, рендерит компонент
@@ -17,23 +17,3 @@ const PrivateRoute = ({ isAuth, redirectTo, children, ...routeProps }) => {
 };
 
 export default PrivateRoute;
-
-// const PrivateRoute = ({
-//   component: Component,
-//   isAuth,
-//   redirectTo,
-//   ...routeProps
-// }) => (
-//   <Route
-//     {...routeProps}
-//     render={(props) =>
-//       isAuth ? <Component {...props} /> : <Redirect to={redirectTo} />
-//     }
-//   />
-// );
-
-// const mapStateToProps = (state) => ({
-//   isAuth: getIsAuth(state),
-// });
-
-// export default connect(mapStateToProps)(PrivateRoute);
