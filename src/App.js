@@ -23,7 +23,7 @@ const RegisterView = lazy(() =>
   import("./views/RegisterView" /* webpackChunkName: "register-page" */)
 );
 
-const PhonebookView = lazy(() =>
+           const PhonebookView = lazy(() =>
   import("./views/PhonebookView" /* webpackChunkName: "phonebook-page" */)
 );
 
