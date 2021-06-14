@@ -1,0 +1,27 @@
+.nav {
+  width: 400px;
+  text-decoration: none;
+
+  &__link {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: #9098a3;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &--active {
+      color: #022147;
+      text-decoration: underline;
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+}
+
+.authnav {
+  display: flex;
+  justify-content: flex-end;
+}
