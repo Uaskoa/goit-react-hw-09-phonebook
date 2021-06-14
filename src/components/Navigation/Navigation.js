@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import routes from "../../routes";
 import { getIsAuth } from "../../redux/auth/auth-selectors";
 import "./Navigation.scss";
 
-const Navigation = ({ isAuth }) => {
+export default function Navigation() {
+  const isLoggedIn = useSelector(getIsAuth);
   return (
     <nav className="nav">
       <NavLink
@@ -16,7 +17,7 @@ const Navigation = ({ isAuth }) => {
         Home
       </NavLink>
 
-      {isAuth && (
+      {isLoggedIn && (
         <NavLink
           className="nav__link"
           exact
@@ -28,10 +29,36 @@ const Navigation = ({ isAuth }) => {
       )}
     </nav>
   );
-};
+}
 
-const mapStateToProps = (state) => ({
-  isAuth: getIsAuth(state),
-});
+// const Navigation = ({ isAuth }) => {
+//   return (
+//     <nav className="nav">
+//       <NavLink
+//         className="nav__link"
+//         exact
+//         to={routes.home}
+//         activeClassName="nav__link--active"
+//       >
+//         Home
+//       </NavLink>
 
-export default connect(mapStateToProps)(Navigation);
+//       {isAuth && (
+//         <NavLink
+//           className="nav__link"
+//           exact
+//           to={routes.contacts}
+//           activeClassName="nav__link--active"
+//         >
+//           Phonebook
+//         </NavLink>
+//       )}
+//     </nav>
+//   );
+// };
+
+// const mapStateToProps = (state) => ({
+//   isAuth: getIsAuth(state),
+// });
+
+// export default connect(mapStateToProps)(Navigation);

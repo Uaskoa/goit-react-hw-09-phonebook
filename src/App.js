@@ -1,6 +1,6 @@
-import { Component, Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import routes from "./routes";
 import AppBar from "./components/AppBar/AppBar";
 import NotFoundView from "./views/NotFoundView";
@@ -27,56 +27,104 @@ const PhonebookView = lazy(() =>
   import("./views/PhonebookView" /* webpackChunkName: "phonebook-page" */)
 );
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
+export default function App() {
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <div className="container">
-        <AppBar />
-        <Suspense
-          fallback={
-            <Loader
-              className="Loader"
-              type="ThreeDots"
-              color="#9098a3"
-              height={50}
-              width={50}
-              timeout={3000}
-            />
-          }
-        >
-          <Switch>
-            <Route exact path={routes.home} component={HomeView} />
-            <PublicRoute
-              path={routes.register}
-              restricted
-              redirectTo={routes.contacts}
-              component={RegisterView}
-            />
-            <PublicRoute
-              path={routes.login}
-              restricted
-              redirectTo={routes.contacts}
-              component={LoginView}
-            />
-            <PrivateRoute
-              path={routes.contacts}
-              redirectTo={routes.login}
-              component={PhonebookView}
-            />
-            <Route component={NotFoundView} />
-          </Switch>
-        </Suspense>
-      </div>
-    );
-  }
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
+
+  return (
+    <div className="container">
+      <AppBar />
+      <Suspense
+        fallback={
+          <Loader
+            className="Loader"
+            type="ThreeDots"
+            color="#9098a3"
+            height={50}
+            width={50}
+            timeout={3000}
+          />
+        }
+      >
+        <Switch>
+          <Route exact path={routes.home} component={HomeView} />
+          <PublicRoute
+            path={routes.register}
+            restricted
+            redirectTo={routes.contacts}
+          >
+            <RegisterView />
+          </PublicRoute>
+          <PublicRoute
+            path={routes.login}
+            restricted
+            redirectTo={routes.contacts}
+          >
+            <LoginView />
+          </PublicRoute>
+          <PrivateRoute path={routes.contacts} redirectTo={routes.login}>
+            <PhonebookView />
+          </PrivateRoute>
+          <Route component={NotFoundView} />
+        </Switch>
+      </Suspense>
+    </div>
+  );
 }
 
-const mapDispatchToProps = {
-  onGetCurrentUser: authOperations.getCurrentUser,
-};
+// class App extends Component {
+//   componentDidMount() {
+//     this.props.onGetCurrentUser();
+//   }
 
-export default connect(null, mapDispatchToProps)(App);
+//   render() {
+//     return (
+//       <div className="container">
+//         <AppBar />
+//         <Suspense
+//           fallback={
+//             <Loader
+//               className="Loader"
+//               type="ThreeDots"
+//               color="#9098a3"
+//               height={50}
+//               width={50}
+//               timeout={3000}
+//             />
+//           }
+//         >
+//           <Switch>
+//             <Route exact path={routes.home} component={HomeView} />
+//             <PublicRoute
+//               path={routes.register}
+//               restricted
+//               redirectTo={routes.contacts}
+//               component={RegisterView}
+//             />
+//             <PublicRoute
+//               path={routes.login}
+//               restricted
+//               redirectTo={routes.contacts}
+//               component={LoginView}
+//             />
+//             <PrivateRoute
+//               path={routes.contacts}
+//               redirectTo={routes.login}
+//               component={PhonebookView}
+//             />
+//             <Route component={NotFoundView} />
+//           </Switch>
+//         </Suspense>
+//       </div>
+//     );
+//   }
+// }
+
+// const mapDispatchToProps = {
+//   onGetCurrentUser: authOperations.getCurrentUser,
+// };
+
+// export default connect(null, mapDispatchToProps)(App);
