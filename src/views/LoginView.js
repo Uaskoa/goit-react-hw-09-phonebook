@@ -5,39 +5,24 @@ import '../components/ContactForm/ContactForm.scss';
 
 export default function LoginView() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
 
-  const handleEmailChange = evt => {
-    setEmail(evt.target.value);
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = evt => {
+    const { name, value } = evt.target;
+    setUser({ ...user, [name]: value });
   };
-
-  const [password, setPassword] = useState('');
-
-  const handlePasswordChange = evt => {
-    setPassword(evt.target.value);
-  };
-
-  // const handleChange = evt => {
-  //   const {name, value} = evt.target;
-  //   switch (name) {
-  //     case "email":
-  //       setEmail(value);
-  //       break;
-
-  //     case "password":
-  //       setPassword(value);
-  //       break;
-
-  //     default:
-  //       console.warn("Such type of field is not valid");
-  //   }
-  // }
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(authOperations.login({ email, password }));
-    setEmail('');
-    setPassword('');
+    dispatch(authOperations.login(user));
+    setUser({
+      email: '',
+      password: '',
+    });
   };
 
   return (
@@ -50,8 +35,8 @@ export default function LoginView() {
             <input
               className="input"
               type="email"
-              value={email}
-              onChange={handleEmailChange}
+              value={user.email}
+              onChange={handleChange}
               name="email"
             />
           </label>
@@ -60,9 +45,9 @@ export default function LoginView() {
             <input
               className="input"
               type="password"
-              value={password}
+              value={user.password}
               name="password"
-              onChange={handlePasswordChange}
+              onChange={handleChange}
             />
             <button className="button button-center" type="submit">
               Login
@@ -73,3 +58,38 @@ export default function LoginView() {
     </div>
   );
 }
+
+// const [email, setEmail] = useState('');
+
+// const handleEmailChange = evt => {
+//   setEmail(evt.target.value);
+// };
+
+// const [password, setPassword] = useState('');
+
+// const handlePasswordChange = evt => {
+//   setPassword(evt.target.value);
+// };
+
+// const handleChange = evt => {
+//   const {name, value} = evt.target;
+//   switch (name) {
+//     case "email":
+//       setEmail(value);
+//       break;
+
+//     case "password":
+//       setPassword(value);
+//       break;
+
+//     default:
+//       console.warn("Such type of field is not valid");
+//   }
+// }
+
+// const handleSubmit = evt => {
+//   evt.preventDefault();
+//   dispatch(authOperations.login({ email, password }));
+//   setEmail('');
+//   setPassword('');
+// };
