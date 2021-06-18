@@ -7,28 +7,30 @@ import './ContactForm.scss';
 export default function ContactForm() {
   const dispatch = useDispatch();
 
-
   const [contact, setContact] = useState({
     name: '',
     number: '',
-  })
+  });
 
   const nameInputId = shortId.generate();
   const phoneInputId = shortId.generate();
 
   const handleChange = evt => {
+    console.log(evt.target.name);
+    console.log(evt.target.value);
     const { name, value } = evt.target;
-     setContact(prevContact => ({ ...prevContact, [name]: value }));
+    setContact(prevContact => ({ ...prevContact, [name]: value }));
+    console.log(contact);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(phonebookOperations.addContact(contact));
+    const { name, number } = contact;
+    dispatch(phonebookOperations.addContact(name, number));
     setContact({
       name: '',
       number: '',
     });
-
   };
 
   return (
@@ -68,7 +70,6 @@ export default function ContactForm() {
   );
 }
 
-
 // export default function ContactForm() {
 //   const dispatch = useDispatch();
 //   const [name, setName] = useState('');
@@ -101,7 +102,6 @@ export default function ContactForm() {
 //     setNumber('');
 //   };
 
-  
 //   return (
 //     <form className="form" onSubmit={handleSubmit}>
 //       <label className="form-label" htmlFor={nameInputId}>
