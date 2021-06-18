@@ -16,11 +16,8 @@ export default function ContactForm() {
   const phoneInputId = shortId.generate();
 
   const handleChange = evt => {
-    console.log(evt.target.name);
-    console.log(evt.target.value);
     const { name, value } = evt.target;
     setContact(prevContact => ({ ...prevContact, [name]: value }));
-    console.log(contact);
   };
 
   const handleSubmit = evt => {
